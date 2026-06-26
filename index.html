@@ -2,100 +2,107 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Second Chance Life Simulator</title>
+  <title>Second Chance</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <!-- LOADING -->
-<div id="loading-screen">
-  <div class="logo">
-    <img src="assets/logo.png" width="180">
+<div id="loading">
+  <div class="brand">
+    <img src="assets/logo.png">
+    <p>Loading your second chance...</p>
   </div>
-  <div class="loader"></div>
-  <p>Loading your second chance...</p>
+  <div class="bar"></div>
 </div>
 
-<!-- GAME -->
-<div id="game" class="hidden">
+<!-- APP -->
+<div id="app" class="hidden">
 
-  <div class="top-bar">
-    <h1>Second Chance</h1>
-    <p>Your life begins now...</p>
+  <!-- TOP HEADER -->
+  <div class="header">
+    <div class="title">SECOND CHANCE</div>
+    <div class="subtitle">Life Simulator</div>
   </div>
 
-  <div class="creator">
+  <div class="layout">
 
-    <!-- LEFT: STEP PANEL -->
-    <div class="glass-panel">
+    <!-- LEFT: CHARACTER DEVICE CARD -->
+    <div class="phone">
 
-      <div class="step-title" id="stepTitle">Step 1: Identity</div>
-
-      <!-- STEP 1 -->
-      <div class="step" id="step1">
-
-        <input type="text" id="name" placeholder="Full Name">
-
-        <select id="gender">
-          <option>Male</option>
-          <option>Female</option>
-          <option>Other</option>
-        </select>
-
-        <input type="number" id="age" value="18">
-
+      <div class="phone-header">
+        <div class="avatar" id="avatar">??</div>
+        <div>
+          <div class="name" id="liveName">Unknown</div>
+          <div class="meta" id="liveMeta">Create your life</div>
+        </div>
       </div>
 
-      <!-- STEP 2 -->
-      <div class="step hidden" id="step2">
+      <!-- STEP CONTENT -->
+      <div class="screen">
 
-        <select id="country" onchange="updateStates()">
-          <option value="">Select Country</option>
-          <option value="US">???? United States</option>
-          <option value="CA">???? Canada</option>
-          <option value="MX">???? Mexico</option>
-          <option value="UK">???? United Kingdom</option>
-          <option value="JP">???? Japan</option>
-          <option value="DE">???? Germany</option>
-        </select>
+        <!-- STEP 1 -->
+        <div class="step show" id="step1">
+          <input id="name" placeholder="Full Name">
+          <select id="gender">
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+          <input id="age" type="number" value="18">
+        </div>
 
-        <select id="state">
-          <option>Select Country First</option>
-        </select>
+        <!-- STEP 2 -->
+        <div class="step" id="step2">
+          <select id="country" onchange="updateStates()">
+            <option value="">Country</option>
+            <option value="US">???? United States</option>
+            <option value="CA">???? Canada</option>
+            <option value="MX">???? Mexico</option>
+            <option value="UK">???? United Kingdom</option>
+          </select>
 
-      </div>
+          <select id="state">
+            <option>Select country</option>
+          </select>
+        </div>
 
-      <!-- STEP 3 -->
-      <div class="step hidden" id="step3">
-        <div class="portrait" id="portrait">??</div>
-        <p class="hint">Your character avatar will appear here</p>
-      </div>
+        <!-- STEP 3 -->
+        <div class="step" id="step3">
+          <div class="big-avatar" id="bigAvatar">??</div>
+          <div class="hint">Your life is being formed...</div>
+        </div>
 
-      <!-- STEP 4 -->
-      <div class="step hidden" id="step4">
-        <div id="story"></div>
+        <!-- STEP 4 -->
+        <div class="step" id="step4">
+          <div class="story" id="story"></div>
+        </div>
+
       </div>
 
       <!-- NAV -->
-      <div class="nav-buttons">
+      <div class="nav">
         <button onclick="prevStep()">Back</button>
         <button onclick="nextStep()">Next</button>
       </div>
 
-      <button class="start-btn" onclick="startGame()">Start Life</button>
+      <button class="start" onclick="startGame()">START LIFE</button>
 
     </div>
 
-    <!-- RIGHT PREVIEW -->
-    <div class="preview-card">
+    <!-- RIGHT: INFO PANEL -->
+    <div class="panel">
 
-      <div class="preview-title">Life Preview</div>
+      <div class="panel-title">Life Preview</div>
 
-      <div id="previewText">Start building your life...</div>
+      <div class="card" id="preview">
+        Build your character to begin your story...
+      </div>
 
     </div>
 
   </div>
+
 </div>
 
 <script src="script.js"></script>
