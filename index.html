@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>Second Chance</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <link rel="stylesheet" href="style.css">
 </head>
 
@@ -16,21 +15,20 @@
     <div id="ageDisplay">Age: 0</div>
 </div>
 
-<!-- MENU SCREEN -->
+<!-- MENU -->
 <div id="menuScreen" class="screen active">
     <div class="card">
         <h1>Second Chance</h1>
         <p>Life Simulator</p>
-
         <button onclick="showCreator()">New Life</button>
         <button onclick="loadGame()">Continue</button>
     </div>
 </div>
 
-<!-- CREATOR SCREEN -->
+<!-- CREATOR -->
 <div id="creatorScreen" class="screen">
     <div class="card">
-        <h2>Create Your Life</h2>
+        <h2>Create Life</h2>
 
         <input id="first" placeholder="First Name">
         <input id="last" placeholder="Last Name">
@@ -45,7 +43,7 @@
     </div>
 </div>
 
-<!-- GAME SCREEN -->
+<!-- GAME -->
 <div id="gameScreen" class="screen">
 
     <!-- SIDEBAR -->
@@ -57,18 +55,18 @@
         <button onclick="setTab('activity')">Activity</button>
     </div>
 
-    <!-- MAIN CONTENT -->
+    <!-- MAIN -->
     <div id="main">
 
-        <!-- LIFE TAB -->
+        <!-- LIFE -->
         <div id="lifeTab" class="tab activeTab">
             <h2 id="name"></h2>
 
             <div class="card">
-                <p>Your journey begins...</p>
+                <p>Your story begins...</p>
             </div>
 
-            <button onclick="ageUp()">AGE UP ?</button>
+            <button id="ageBtn" onclick="ageUp()">AGE UP</button>
 
             <div id="log"></div>
         </div>
@@ -76,19 +74,39 @@
         <!-- STATS -->
         <div id="statsTab" class="tab">
             <div class="card">
-                <p>Health: <span id="health"></span></p>
-                <p>Happiness: <span id="happiness"></span></p>
-                <p>Smarts: <span id="smarts"></span></p>
-                <p>Looks: <span id="looks"></span></p>
-                <p>Money: $<span id="money"></span></p>
+
+                <div class="stat">
+                    <div class="label">Health</div>
+                    <div class="bar"><div id="healthBar" class="fill"></div></div>
+                </div>
+
+                <div class="stat">
+                    <div class="label">Happiness</div>
+                    <div class="bar"><div id="happinessBar" class="fill"></div></div>
+                </div>
+
+                <div class="stat">
+                    <div class="label">Smarts</div>
+                    <div class="bar"><div id="smartsBar" class="fill"></div></div>
+                </div>
+
+                <div class="stat">
+                    <div class="label">Looks</div>
+                    <div class="bar"><div id="looksBar" class="fill"></div></div>
+                </div>
+
+                <div class="stat">
+                    <div class="label">Money</div>
+                    <div class="bar"><div id="moneyBar" class="fill"></div></div>
+                </div>
+
             </div>
         </div>
 
         <!-- RELATIONS -->
         <div id="relationsTab" class="tab">
             <div class="card">
-                <p>Parents: Not added yet</p>
-                <p>Friends: Not added yet</p>
+                <p>Family system coming soon</p>
             </div>
         </div>
 
@@ -112,6 +130,5 @@
 </div>
 
 <script src="script.js"></script>
-
 </body>
 </html>

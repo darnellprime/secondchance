@@ -1,24 +1,11 @@
 let player = {
     name: "",
     age: 0,
-
-    stage: "baby",
-
     health: 100,
     happiness: 100,
-    smarts: 50,
-    looks: 50,
-
+    smarts: 60,
+    looks: 60,
     money: 0,
-
-    job: null,
-    salary: 0,
-
-    school: "none",
-    grade: 0,
-
-    crimeLevel: 0,
-
     log: []
 };
 
@@ -38,181 +25,128 @@ function showMenu(){ show("menuScreen"); }
 function startGame(){
 
 let first = document.getElementById("first").value || "New";
-let last = document.getElementById("last").value || "Born";
+let last = document.getElementById("last").value || "Life";
 
 player.name = first + " " + last;
+player.age = 0;
 
 show("gameScreen");
 updateUI();
 
-addLog("You were born into the world.");
+log("You were born.");
 }
 
-/* AGE SYSTEM */
+/* AGE UP */
 function ageUp(){
 
 player.age++;
 
-/* LIFE STAGES */
-if(player.age === 3) player.stage = "child";
-if(player.age === 13) player.stage = "teen";
-if(player.age === 18) player.stage = "adult";
-
-/* SCHOOL SYSTEM */
-if(player.age < 18){
-    player.school = "School";
-    player.grade += rand(1,2);
-}
-
-/* JOB SYSTEM */
-if(player.age >= 18 && !player.job){
-    tryGetJob();
-}
-
-/* MONEY */
-if(player.job){
-    player.money += player.salary;
-}
-
-/* RANDOM EVENTS */
-runEvents();
-
-/* STAT DECAY */
-player.health += rand(-3,1);
+/* yearly simulation */
+player.health += rand(-3,2);
 player.happiness += rand(-4,3);
 player.smarts += rand(0,2);
+player.looks += rand(-2,1);
+player.money += rand(0,30);
 
-/* CRIME CONSEQUENCE */
-if(player.crimeLevel > 5 && Math.random() < 0.2){
-    addLog("You got caught and fined!");
-    player.money -= 200;
-}
-
-/* CLAMP */
-clamp();
-
-/* UPDATE */
-updateUI();
-renderLog();
-}
-
-/* JOB SYSTEM */
-function tryGetJob(){
-
-let jobs = [
-{title:"Retail Worker",salary:2000},
-{title:"Fast Food Worker",salary:1800},
-{title:"Office Assistant",salary:2500}
-];
-
-let job = jobs[Math.floor(Math.random()*jobs.length)];
-
-player.job = job.title;
-player.salary = job.salary;
-
-addLog("You got a job as a " + job.title);
-}
-
-/* EVENTS */
-function runEvents(){
-
+/* events */
 let events = [
-
-"You had a normal day.",
-"You felt motivated.",
-"You argued with someone.",
-"You found $50.",
-"You studied hard.",
-"You got sick."
-
+"You had a peaceful year.",
+"You got sick.",
+"You learned something new.",
+"You had a rough day.",
+"You found money on the ground."
 ];
 
 let e = events[Math.floor(Math.random()*events.length)];
+log("Age " + player.age + ": " + e);
 
-if(e.includes("found $")) player.money += 50;
-if(e.includes("sick")) player.health -= 10;
-if(e.includes("motivated")) player.happiness += 5;
-
-addLog("Age " + player.age + ": " + e);
-}
-
-/* CRIME */
-function commitCrime(){
-
-let success = Math.random() > 0.5;
-
-if(success){
-    player.money += 100;
-    player.crimeLevel += 2;
-    addLog("You committed a small crime and made money.");
-}else{
-    player.crimeLevel += 5;
-    player.happiness -= 10;
-    addLog("You got caught doing a crime!");
-}
-
+clamp();
 updateUI();
+updateBars();
 }
 
-/* SAVE SYSTEM */
+/* LOG */
+function log(text){
+player.log.push(text);
+
+let logBox = document.getElementById("log");
+logBox.innerHTML = "";
+
+player.log.slice(-8).forEach(e=>{
+    logBox.innerHTML += "<div>• " + e + "</div>";
+});
+}
+
+/* UI */
+function updateUI(){
+document.getElementById("name").innerText = player.name;
+document.getElementById("ageDisplay").innerText = "Age: " + player.age;
+}
+
+/* BARS */
+function updateBars(){
+
+document.getElementById("healthBar").style.width = player.health + "%";
+document.getElementById("happinessBar").style.width = player.happiness + "%";
+document.getElementById("smartsBar").style.width = player.smarts + "%";
+document.getElementById("looksBar").style.width = player.looks + "%";
+
+let moneyBar = Math.min(player.money / 1000 * 100, 100);
+document.getElementById("moneyBar").style.width = moneyBar + "%";
+}
+
+/* TABS */
+function setTab(tab){
+
+document.querySelectorAll(".tab").forEach(t=>{
+    t.classList.remove("activeTab");
+});
+
+document.getElementById(tab + "Tab").classList.add("activeTab");
+}
+
+/* SAVE */
 function saveGame(){
-localStorage.setItem("secondChance", JSON.stringify(player));
-addLog("Game saved.");
+localStorage.setItem("sc_save", JSON.stringify(player));
+log("Game saved.");
 }
 
-/* LOAD SYSTEM */
+/* LOAD */
 function loadGame(){
-let data = localStorage.getItem("secondChance");
+let data = localStorage.getItem("sc_save");
 if(!data) return;
 
 player = JSON.parse(data);
 
 show("gameScreen");
 updateUI();
-renderLog();
-
-addLog("Game loaded.");
+updateBars();
+log("Game loaded.");
 }
 
-/* LOG */
-function addLog(text){
-player.log.push(text);
+/* CRIME */
+function commitCrime(){
+
+if(Math.random() > 0.5){
+    player.money += 100;
+    log("You committed a crime and made money.");
+}else{
+    player.happiness -= 10;
+    log("You got caught committing a crime.");
 }
 
-/* RENDER LOG */
-function renderLog(){
-let log = document.getElementById("log");
-log.innerHTML = "";
-
-player.log.slice(-8).forEach(e=>{
-    log.innerHTML += "<div>• " + e + "</div>";
-});
+updateUI();
+updateBars();
 }
 
-/* UI */
-function updateUI(){
-
-document.getElementById("name").innerText = player.name;
-document.getElementById("ageDisplay").innerText = "Age: " + player.age;
-
-document.getElementById("health").innerText = player.health;
-document.getElementById("happiness").innerText = player.happiness;
-document.getElementById("smarts").innerText = player.smarts;
-document.getElementById("looks").innerText = player.looks;
-document.getElementById("money").innerText = player.money;
-
-}
-
-/* CLAMP */
+/* HELPERS */
 function clamp(){
-
-player.health = Math.max(0,Math.min(100,player.health));
-player.happiness = Math.max(0,Math.min(100,player.happiness));
-player.smarts = Math.max(0,Math.min(100,player.smarts));
-
+player.health = Math.max(0, Math.min(100, player.health));
+player.happiness = Math.max(0, Math.min(100, player.happiness));
+player.smarts = Math.max(0, Math.min(100, player.smarts));
+player.looks = Math.max(0, Math.min(100, player.looks));
 }
 
-/* RANDOM */
 function rand(min,max){
 return Math.floor(Math.random()*(max-min+1))+min;
 }
