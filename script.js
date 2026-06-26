@@ -1,138 +1,98 @@
-let step = 1;
-let seed = Math.floor(Math.random() * 999999);
+let age = 0;
 
-/* LOAD */
-window.addEventListener("load", () => {
-  setTimeout(() => {
-    document.getElementById("loading").style.display = "none";
-    document.getElementById("app").classList.remove("hidden");
-  }, 1200);
-});
-
-/* STEP */
-function showStep() {
-  document.querySelectorAll(".step").forEach(s => s.classList.remove("show"));
-  document.getElementById("step" + step).classList.add("show");
-}
-
-function nextStep() {
-  if (step < 4) step++;
-  showStep();
-  updateUI();
-  if (step === 3) generateLife();
-}
-
-function prevStep() {
-  if (step > 1) step--;
-  showStep();
-  updateUI();
-}
-
-/* STATES */
-const states = {
-  US: ["California", "Texas", "Florida"],
-  CA: ["Ontario", "Quebec"],
-  UK: ["England", "Scotland"],
-  JP: ["Tokyo", "Osaka"]
+const life = {
+  health: 80,
+  smarts: 60,
+  happiness: 70,
+  looks: 50,
+  money: 0
 };
 
-function updateStates() {
-  const c = document.getElementById("country").value;
-  const s = document.getElementById("state");
-  s.innerHTML = "";
-  (states[c] || []).forEach(x => {
-    let o = document.createElement("option");
-    o.textContent = x;
-    s.appendChild(o);
-  });
+/* OCCUPATION SYSTEM */
+function getOccupation(age) {
+  if (age === 0) return "Infant";
+  if (age <= 2) return "Toddler";
+  if (age <= 4) return "Day Care";
+  if (age <= 10) return "Elementary School";
+  if (age <= 13) return "Middle School";
+  if (age <= 17) return "High School";
+  return "Adult";
 }
 
-/* SAFE AGE */
-function getAge() {
-  const a = parseInt(document.getElementById("age").value);
-  return isNaN(a) || a < 1 ? 18 : a;
+/* AGE UP */
+function ageUp() {
+  age++;
+
+  document.getElementById("ageDisplay").innerText = "Age: " + age;
+  document.getElementById("occupation").innerText = getOccupation(age);
+
+  simulateYear();
+  updateUI();
 }
 
-/* STATS GENERATOR */
-function genStat(min, max) {
+/* YEAR SIM */
+function simulateYear() {
+  life.happiness += rand(-5, 5);
+  life.health += rand(-3, 3);
+  life.smarts += rand(0, 2);
+
+  life.happiness = clamp(life.happiness);
+  life.health = clamp(life.health);
+  life.smarts = clamp(life.smarts);
+
+  addFeed("You aged up to " + age);
+}
+
+/* FEED */
+function addFeed(text) {
+  const feed = document.getElementById("lifeFeed");
+  const div = document.createElement("div");
+  div.innerText = text;
+  feed.prepend(div);
+}
+
+/* STATS UI */
+function updateUI() {
+  document.getElementById("stats").innerHTML = `
+    Health: ${life.health}<br>
+    Smarts: ${life.smarts}<br>
+    Happiness: ${life.happiness}<br>
+    Looks: ${life.looks}<br>
+    Money: $${life.money}
+  `;
+}
+
+/* TABS */
+function setTab(tab) {
+  const content = document.getElementById("tabContent");
+
+  if (tab === "relationships") {
+    content.innerHTML = "No relationships yet.";
+  }
+
+  if (tab === "activities") {
+    content.innerHTML = "Go to school, work out, or explore.";
+  }
+
+  if (tab === "assets") {
+    content.innerHTML = "No assets owned.";
+  }
+
+  if (tab === "school") {
+    if (age < 18) content.innerHTML = "Currently enrolled in school.";
+    else content.innerHTML = "Not in school.";
+  }
+}
+
+/* HELPERS */
+function rand(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-/* LIFE ENGINE */
-let life = {};
-
-function generateLife() {
-
-  const country = document.getElementById("country").value || "Unknown";
-
-  life = {
-    health: genStat(40, 100),
-    smarts: genStat(40, 100),
-    happiness: genStat(30, 100),
-    looks: genStat(20, 100),
-    money: genStat(0, 5000),
-
-    traits: [],
-    family: {},
-    story: ""
-  };
-
-  /* TRAITS */
-  const traitsPool = ["Ambitious", "Lazy", "Risk Taker", "Charismatic", "Aggressive"];
-  life.traits.push(traitsPool[Math.floor(Math.random() * traitsPool.length)]);
-
-  /* FAMILY */
-  life.family = {
-    income: ["Poor", "Middle Class", "Wealthy"][Math.floor(Math.random() * 3)],
-    stability: ["Stable", "Chaotic", "Broken"][Math.floor(Math.random() * 3)]
-  };
-
-  /* STORY */
-  const stories = [
-    "You were born into a quiet but uncertain world.",
-    "Your childhood was shaped by instability and change.",
-    "You grew up in a structured but strict household.",
-    "Life began with challenges that shaped your mindset.",
-    "You were born into opportunity, but expectations were high."
-  ];
-
-  life.story = stories[Math.floor(Math.random() * stories.length)];
-
-  document.getElementById("story").innerHTML =
-    `<b>Birth Story:</b><br>${life.story}`;
-}
-
-/* UI */
-function updateUI() {
-
-  const name = document.getElementById("name").value || "Unknown";
-  const gender = document.getElementById("gender").value;
-
-  document.getElementById("liveName").textContent = name;
-  document.getElementById("liveMeta").textContent =
-    `${gender} • Seed ${seed}`;
-
-  document.getElementById("preview").innerHTML =
-    `
-    <b>Stats</b><br>
-    Health: ${life.health || "-"}<br>
-    Smarts: ${life.smarts || "-"}<br>
-    Happiness: ${life.happiness || "-"}<br>
-    Looks: ${life.looks || "-"}<br><br>
-
-    <b>Traits</b><br>
-    ${life.traits?.join(", ") || "-"}<br><br>
-
-    <b>Family</b><br>
-    ${life.family ? life.family.income + " / " + life.family.stability : "-"}
-    `;
-}
-
-/* START */
-function startGame() {
-  alert("Life simulation begins (next step: aging system)");
+function clamp(val) {
+  return Math.max(0, Math.min(100, val));
 }
 
 /* INIT */
-showStep();
 updateUI();
+setTab("relationships");
