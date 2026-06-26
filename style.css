@@ -9,7 +9,7 @@ overflow:hidden;
 #topbar{
 height:52px;
 background:#0a0a0f;
-border-bottom:1px solid #300000;
+border-bottom:1px solid #2a0000;
 display:flex;
 justify-content:space-between;
 align-items:center;
@@ -22,7 +22,7 @@ padding:0 16px;
 #sidebar{
 width:140px;
 background:#0a0a0f;
-border-right:1px solid #300000;
+border-right:1px solid #2a0000;
 padding:10px;
 }
 
@@ -34,51 +34,33 @@ padding:10px;
 
 .card{
 background:#0f0f14;
-border:1px solid #300000;
+border:1px solid #2a0000;
 padding:15px;
-border-radius:12px;
+border-radius:10px;
 }
 
-/* AGE BUTTON */
 #ageBtn{
-width:130px;
-height:130px;
+width:120px;
+height:120px;
 border-radius:50%;
-background:#ff2a2a;
-color:white;
+background:red;
 border:none;
+color:white;
+font-weight:bold;
 margin:20px auto;
 display:block;
-font-weight:bold;
-font-size:14px;
-box-shadow:0 0 25px rgba(255,0,0,0.4);
 }
 
-/* EVENT CARD */
-#eventCard{
-margin-top:15px;
-padding:15px;
-background:#111;
-border:1px solid red;
-border-radius:12px;
-animation:pop .3s ease;
+.bar{
+height:10px;
+background:#222;
+border-radius:10px;
+margin:6px 0;
+overflow:hidden;
 }
 
-@keyframes pop{
-from{transform:scale(.9);opacity:0;}
-to{transform:scale(1);opacity:1;}
-}
-
-button.choice{
-width:100%;
-margin-top:8px;
-background:#1a1a1a;
-border:1px solid red;
-padding:10px;
-color:white;
-cursor:pointer;
-}
-
-button.choice:hover{
+.fill{
+height:100%;
 background:red;
+width:50%;
 }
