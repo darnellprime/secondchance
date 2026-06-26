@@ -21,31 +21,25 @@
 <div id="game" class="hidden">
 
   <div class="top-bar">
-    <h1>Welcome to Second Chance</h1>
-    <p>Create your character and begin your story</p>
+    <h1>Second Chance</h1>
+    <p>Build your life from scratch</p>
   </div>
 
   <div class="creator">
 
-    <!-- CHARACTER PANEL -->
-    <div class="panel">
-      <h2>Character Creation</h2>
+    <div class="glass-panel">
 
-      <label>Name</label>
-      <input type="text" id="name" placeholder="Enter name">
+      <div class="panel-title">Character Creator</div>
 
-      <label>Age</label>
+      <input type="text" id="name" placeholder="Full Name">
       <input type="number" id="age" value="18">
 
-      <label>Gender</label>
       <select id="gender">
         <option>Male</option>
         <option>Female</option>
         <option>Other</option>
       </select>
 
-      <!-- COUNTRY -->
-      <label>Country</label>
       <select id="country" onchange="updateStates()">
         <option value="">Select Country</option>
         <option value="US">???? United States</option>
@@ -56,24 +50,26 @@
         <option value="DE">???? Germany</option>
       </select>
 
-      <!-- STATE -->
-      <label>State / Province</label>
       <select id="state">
-        <option>Select country first</option>
+        <option>Select Country First</option>
       </select>
 
       <button onclick="startGame()">Start Life</button>
+
     </div>
 
-    <!-- PREVIEW -->
-    <div class="preview">
-      <div class="card">
-        <h3>Preview</h3>
-        <p id="previewText">Fill out your character details...</p>
+    <div class="preview-card">
+
+      <div class="preview-title">Life Preview</div>
+
+      <div id="previewText">
+        Fill out your character to begin...
       </div>
+
     </div>
 
   </div>
+
 </div>
 
 <script src="script.js"></script>

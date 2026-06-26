@@ -5,7 +5,7 @@ body {
   color: white;
 }
 
-/* LOADING */
+/* LOADING SCREEN */
 #loading-screen {
   position: fixed;
   width: 100%;
@@ -48,66 +48,109 @@ body {
   display: none;
 }
 
-/* GAME */
-#game {
-  padding: 40px;
+/* HEADER */
+.top-bar {
+  padding: 30px 40px 0;
 }
 
 .top-bar h1 {
   margin: 0;
-  font-size: 36px;
+  font-size: 38px;
 }
 
 .top-bar p {
   color: #aaa;
 }
 
+/* CREATOR LAYOUT */
 .creator {
   display: flex;
-  gap: 40px;
-  margin-top: 30px;
+  gap: 30px;
+  padding: 40px;
 }
 
-/* PANEL */
-.panel {
-  background: #151521;
-  padding: 20px;
-  border-radius: 12px;
-  width: 320px;
+/* LEFT PANEL */
+.glass-panel {
+  width: 340px;
+  padding: 25px;
+  border-radius: 16px;
+
+  background: rgba(20, 20, 30, 0.75);
+  backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(0, 255, 213, 0.15);
+
+  box-shadow: 0 0 30px rgba(0, 255, 213, 0.08);
 }
 
-.panel input,
-.panel select {
+.panel-title {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #00ffd5;
+  font-weight: bold;
+}
+
+.glass-panel input,
+.glass-panel select {
   width: 100%;
-  margin-bottom: 15px;
-  padding: 10px;
+  padding: 12px;
+  margin-bottom: 12px;
+
   border: none;
-  border-radius: 6px;
-  background: #0b0b0f;
+  border-radius: 10px;
+
+  background: rgba(10, 10, 15, 0.9);
+  color: white;
+
+  outline: none;
+}
+
+.glass-panel input:focus,
+.glass-panel select:focus {
+  box-shadow: 0 0 10px #00ffd5;
+}
+
+.glass-panel button {
+  width: 100%;
+  padding: 12px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: linear-gradient(90deg, #00ffd5, #00a3ff);
+  color: black;
+
+  font-weight: bold;
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.glass-panel button:hover {
+  transform: scale(1.03);
+}
+
+/* RIGHT PANEL */
+.preview-card {
+  flex: 1;
+  padding: 30px;
+  border-radius: 16px;
+
+  background: radial-gradient(circle at top, #1a1a2e, #0b0b0f);
+
+  border: 1px solid rgba(255,255,255,0.05);
+
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+}
+
+.preview-title {
+  font-size: 22px;
+  margin-bottom: 15px;
   color: white;
 }
 
-.panel button {
-  width: 100%;
-  padding: 10px;
-  background: #00ffd5;
-  border: none;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-/* PREVIEW */
-.preview {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.card {
-  background: #151521;
-  padding: 30px;
-  border-radius: 12px;
-  width: 300px;
-  text-align: center;
+#previewText {
+  white-space: pre-line;
+  color: #aaa;
+  line-height: 1.6;
 }

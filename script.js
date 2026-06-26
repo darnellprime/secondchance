@@ -4,7 +4,7 @@ setTimeout(() => {
   document.getElementById("game").classList.remove("hidden");
 }, 2500);
 
-// STATE DATA
+// STATES DATA
 const statesByCountry = {
   US: ["Alabama", "Alaska", "California", "Florida", "New York", "Texas"],
   CA: ["Alberta", "British Columbia", "Ontario", "Quebec"],
@@ -36,7 +36,7 @@ function updateStates() {
   updatePreview();
 }
 
-// LIVE INPUT LISTENERS
+// LIVE INPUT
 ["name", "age", "gender", "country", "state"].forEach(id => {
   document.getElementById(id).addEventListener("input", updatePreview);
 });
@@ -59,5 +59,5 @@ Location: ${state ? state + "," : ""} ${country}`;
 
 // START GAME
 function startGame() {
-  alert("Character created! Next step: Life Simulation Engine");
+  alert("Character created — Next step: Life Simulation System");
 }
