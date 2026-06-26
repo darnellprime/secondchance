@@ -7,19 +7,15 @@
 </head>
 <body>
 
-<!-- LOADING -->
 <div id="loading">
   <div class="brand">
     <img src="assets/logo.png">
-    <p>Loading your second chance...</p>
+    <p>Preparing your second chance...</p>
   </div>
-  <div class="bar"></div>
 </div>
 
-<!-- APP -->
 <div id="app" class="hidden">
 
-  <!-- TOP HEADER -->
   <div class="header">
     <div class="title">SECOND CHANCE</div>
     <div class="subtitle">Life Simulator</div>
@@ -27,21 +23,18 @@
 
   <div class="layout">
 
-    <!-- LEFT: CHARACTER DEVICE CARD -->
     <div class="phone">
 
-      <div class="phone-header">
+      <div class="phone-top">
         <div class="avatar" id="avatar">??</div>
         <div>
           <div class="name" id="liveName">Unknown</div>
-          <div class="meta" id="liveMeta">Create your life</div>
+          <div class="meta" id="liveMeta">Create your story</div>
         </div>
       </div>
 
-      <!-- STEP CONTENT -->
       <div class="screen">
 
-        <!-- STEP 1 -->
         <div class="step show" id="step1">
           <input id="name" placeholder="Full Name">
           <select id="gender">
@@ -52,14 +45,13 @@
           <input id="age" type="number" value="18">
         </div>
 
-        <!-- STEP 2 -->
         <div class="step" id="step2">
           <select id="country" onchange="updateStates()">
             <option value="">Country</option>
-            <option value="US">???? United States</option>
-            <option value="CA">???? Canada</option>
-            <option value="MX">???? Mexico</option>
-            <option value="UK">???? United Kingdom</option>
+            <option value="US">United States</option>
+            <option value="CA">Canada</option>
+            <option value="UK">United Kingdom</option>
+            <option value="JP">Japan</option>
           </select>
 
           <select id="state">
@@ -67,38 +59,29 @@
           </select>
         </div>
 
-        <!-- STEP 3 -->
         <div class="step" id="step3">
-          <div class="big-avatar" id="bigAvatar">??</div>
-          <div class="hint">Your life is being formed...</div>
+          <div class="big-avatar">??</div>
+          <div class="hint">Your identity is forming...</div>
         </div>
 
-        <!-- STEP 4 -->
         <div class="step" id="step4">
-          <div class="story" id="story"></div>
+          <div id="story"></div>
         </div>
 
       </div>
 
-      <!-- NAV -->
       <div class="nav">
         <button onclick="prevStep()">Back</button>
         <button onclick="nextStep()">Next</button>
       </div>
 
-      <button class="start" onclick="startGame()">START LIFE</button>
+      <button class="start" onclick="startGame()">Begin Life</button>
 
     </div>
 
-    <!-- RIGHT: INFO PANEL -->
     <div class="panel">
-
       <div class="panel-title">Life Preview</div>
-
-      <div class="card" id="preview">
-        Build your character to begin your story...
-      </div>
-
+      <div class="card" id="preview"></div>
     </div>
 
   </div>
