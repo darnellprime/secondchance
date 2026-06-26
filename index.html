@@ -2,114 +2,79 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Second Chance v0.0.4</title>
+<title>Second Chance</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div id="topbar">
-  <div>SECOND CHANCE</div>
-  <div id="ageDisplay">Age: 0</div>
+<!-- LOADING SCREEN -->
+<div id="loadingScreen">
+  <img src="logo.png" id="logo">
+  <h1>SECOND CHANCE</h1>
+  <p>Life Simulator</p>
+  <div class="loader"></div>
 </div>
 
-<!-- MENU -->
-<div id="menuScreen" class="screen active">
-  <div class="card">
-    <h1>Second Chance</h1>
-    <button onclick="showCreator()">New Life</button>
-    <button onclick="loadGame()">Continue</button>
+<!-- CHARACTER CREATION -->
+<div id="creatorScreen" class="hidden">
+
+  <div class="header">
+    <h1>New Life</h1>
+    <p>Create your character & start your story</p>
   </div>
+
+  <div class="cardList">
+
+    <div class="card">
+      <label>Name</label>
+      <input id="name" placeholder="Enter name">
+    </div>
+
+    <div class="card">
+      <label>Gender</label>
+      <select id="gender">
+        <option>Male</option>
+        <option>Female</option>
+      </select>
+    </div>
+
+    <div class="card">
+      <label>Country</label>
+      <select id="country">
+        <option>United States</option>
+        <option>United Kingdom</option>
+        <option>Canada</option>
+      </select>
+    </div>
+
+    <div class="card">
+      <label>Place</label>
+      <input id="place" placeholder="City">
+    </div>
+
+    <div class="card special">
+      <label>Special Talent</label>
+      <select id="talent">
+        <option>None</option>
+        <option>Sports</option>
+        <option>Music</option>
+        <option>Business</option>
+      </select>
+    </div>
+
+    <button class="startBtn" onclick="startGame()">
+      START A NEW LIFE
+    </button>
+
+  </div>
+
 </div>
 
-<!-- CREATOR -->
-<div id="creatorScreen" class="screen">
-  <div class="card">
-    <h2>Create Character</h2>
-
-    <input id="first" placeholder="First Name">
-    <input id="last" placeholder="Last Name">
-
-    <label>Looks</label>
-    <input type="range" id="looks" min="0" max="100" value="50">
-
-    <label>Smarts</label>
-    <input type="range" id="smarts" min="0" max="100" value="50">
-
-    <label>Money</label>
-    <input type="range" id="money" min="0" max="5000" value="500">
-
-    <button onclick="startGame()">Start Life</button>
-  </div>
-</div>
-
-<!-- GAME -->
-<div id="gameScreen" class="screen">
-
-  <div id="sidebar">
-    <button onclick="setTab('life')">Life</button>
-    <button onclick="setTab('stats')">Stats</button>
-    <button onclick="setTab('school')">School</button>
-    <button onclick="setTab('career')">Career</button>
-    <button onclick="setTab('assets')">Assets</button>
-    <button onclick="setTab('activity')">Activity</button>
-  </div>
-
-  <div id="main">
-
-    <!-- LIFE -->
-    <div id="lifeTab" class="tab activeTab">
-      <h2 id="name"></h2>
-      <button onclick="ageUp()" id="ageBtn">AGE UP</button>
-      <div id="log"></div>
-    </div>
-
-    <!-- STATS -->
-    <div id="statsTab" class="tab">
-      <div class="card">
-        <div class="bar"><div id="healthBar" class="fill"></div></div>
-        <div class="bar"><div id="happinessBar" class="fill"></div></div>
-        <div class="bar"><div id="smartsBar" class="fill"></div></div>
-        <div class="bar"><div id="looksBar" class="fill"></div></div>
-        <div class="bar"><div id="moneyBar" class="fill"></div></div>
-      </div>
-    </div>
-
-    <!-- SCHOOL -->
-    <div id="schoolTab" class="tab">
-      <div class="card">
-        <p>School: <span id="school"></span></p>
-      </div>
-    </div>
-
-    <!-- CAREER -->
-    <div id="careerTab" class="tab">
-      <div class="card">
-        <p>Job: <span id="job"></span></p>
-        <p>Salary: $<span id="salary"></span></p>
-      </div>
-    </div>
-
-    <!-- ASSETS -->
-    <div id="assetsTab" class="tab">
-      <div class="card">
-        <p>House: <span id="house"></span></p>
-        <p>Car: <span id="car"></span></p>
-      </div>
-    </div>
-
-    <!-- ACTIVITY -->
-    <div id="activityTab" class="tab">
-      <div class="card">
-        <button onclick="commitCrime()">Crime</button>
-        <button onclick="buyHouse()">Buy House</button>
-        <button onclick="buyCar()">Buy Car</button>
-        <button onclick="saveGame()">Save</button>
-      </div>
-    </div>
-
-  </div>
+<!-- GAME SCREEN (EMPTY FOR NOW) -->
+<div id="gameScreen" class="hidden">
+  <h2 style="text-align:center;margin-top:50px;">Game starts here next step ??</h2>
 </div>
 
 <script src="script.js"></script>

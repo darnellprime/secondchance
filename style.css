@@ -1,66 +1,123 @@
 body{
 margin:0;
 font-family:Arial;
-background:#050508;
+background:#050507;
 color:white;
 overflow:hidden;
 }
 
-#topbar{
-height:52px;
-background:#0a0a0f;
-border-bottom:1px solid #2a0000;
+/* LOADING */
+#loadingScreen{
+position:fixed;
+width:100%;
+height:100%;
+background:radial-gradient(#111,#000);
 display:flex;
-justify-content:space-between;
+flex-direction:column;
 align-items:center;
-padding:0 16px;
+justify-content:center;
 }
 
-.screen{display:none;height:calc(100vh - 52px);}
-.active{display:flex !important;}
-
-#sidebar{
+#logo{
 width:140px;
-background:#0a0a0f;
-border-right:1px solid #2a0000;
-padding:10px;
+margin-bottom:10px;
 }
 
-#gameScreen{display:flex;}
-#main{flex:1;padding:15px;}
-
-.tab{display:none;}
-.activeTab{display:block;}
-
-.card{
-background:#0f0f14;
-border:1px solid #2a0000;
-padding:15px;
-border-radius:10px;
-}
-
-#ageBtn{
-width:120px;
-height:120px;
-border-radius:50%;
-background:red;
-border:none;
-color:white;
-font-weight:bold;
-margin:20px auto;
-display:block;
-}
-
-.bar{
-height:10px;
+.loader{
+width:160px;
+height:6px;
 background:#222;
-border-radius:10px;
-margin:6px 0;
+margin-top:20px;
 overflow:hidden;
+border-radius:10px;
+position:relative;
 }
 
-.fill{
+.loader::after{
+content:"";
+position:absolute;
+width:40%;
 height:100%;
 background:red;
-width:50%;
+animation:load 1.4s infinite;
+}
+
+@keyframes load{
+0%{left:-40%;}
+50%{left:30%;}
+100%{left:100%;}
+}
+
+/* CREATOR */
+.hidden{display:none;}
+
+#creatorScreen{
+height:100vh;
+overflow:auto;
+background:linear-gradient(180deg,#07070a,#000);
+padding:20px;
+}
+
+.header{
+text-align:center;
+margin-top:20px;
+}
+
+.header h1{
+color:white;
+font-size:28px;
+}
+
+.header p{
+color:#aaa;
+font-size:13px;
+}
+
+/* CARDS */
+.cardList{
+max-width:420px;
+margin:20px auto;
+}
+
+.card{
+background:#111;
+border:1px solid #222;
+padding:15px;
+border-radius:14px;
+margin-bottom:10px;
+}
+
+.card label{
+font-size:12px;
+color:#aaa;
+display:block;
+margin-bottom:6px;
+}
+
+.card input, .card select{
+width:100%;
+padding:10px;
+border-radius:10px;
+border:none;
+background:#1a1a1a;
+color:white;
+}
+
+/* SPECIAL CARD */
+.special{
+border:1px solid orange;
+}
+
+/* BUTTON */
+.startBtn{
+width:100%;
+padding:15px;
+margin-top:10px;
+border:none;
+border-radius:14px;
+background:linear-gradient(90deg,#00c853,#00e676);
+color:white;
+font-weight:bold;
+font-size:16px;
+cursor:pointer;
 }
