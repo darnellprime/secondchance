@@ -17,7 +17,6 @@ body {
 
 .brand {
   text-align: center;
-  opacity: 0.9;
 }
 
 .brand img {
@@ -25,7 +24,9 @@ body {
   opacity: 0.9;
 }
 
-.hidden { display: none; }
+.hidden {
+  display: none;
+}
 
 /* HEADER */
 .header {
@@ -93,7 +94,6 @@ body {
   height: 260px;
 }
 
-/* STEPS */
 .step { display: none; }
 .step.show { display: block; }
 
@@ -107,7 +107,6 @@ input, select {
 
   background: #121a24;
   color: #e6edf3;
-  outline: none;
 }
 
 /* BIG AVATAR */
@@ -136,7 +135,6 @@ input, select {
   border: none;
   background: #121a24;
   color: #e6edf3;
-  cursor: pointer;
 }
 
 /* START */
@@ -146,7 +144,6 @@ input, select {
   padding: 12px;
   border-radius: 12px;
   border: none;
-
   background: linear-gradient(90deg, #7c5cff, #ffb86b);
   color: #0b0f14;
   font-weight: 600;

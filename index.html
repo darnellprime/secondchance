@@ -7,6 +7,7 @@
 </head>
 <body>
 
+<!-- LOADING -->
 <div id="loading">
   <div class="brand">
     <img src="assets/logo.png">
@@ -14,6 +15,7 @@
   </div>
 </div>
 
+<!-- APP -->
 <div id="app" class="hidden">
 
   <div class="header">
@@ -23,13 +25,14 @@
 
   <div class="layout">
 
+    <!-- LEFT PHONE UI -->
     <div class="phone">
 
       <div class="phone-top">
-        <div class="avatar" id="avatar">??</div>
+        <div class="avatar">??</div>
         <div>
           <div class="name" id="liveName">Unknown</div>
-          <div class="meta" id="liveMeta">Create your story</div>
+          <div class="meta" id="liveMeta">Create your life</div>
         </div>
       </div>
 
@@ -37,12 +40,14 @@
 
         <div class="step show" id="step1">
           <input id="name" placeholder="Full Name">
+
           <select id="gender">
             <option>Male</option>
             <option>Female</option>
             <option>Other</option>
           </select>
-          <input id="age" type="number" value="18">
+
+          <input id="age" type="number" value="18" min="1">
         </div>
 
         <div class="step" id="step2">
@@ -61,7 +66,7 @@
 
         <div class="step" id="step3">
           <div class="big-avatar">??</div>
-          <div class="hint">Your identity is forming...</div>
+          <div class="hint">Your life is being shaped...</div>
         </div>
 
         <div class="step" id="step4">
@@ -75,13 +80,14 @@
         <button onclick="nextStep()">Next</button>
       </div>
 
-      <button class="start" onclick="startGame()">Begin Life</button>
+      <button class="start" onclick="startGame()">Start Life</button>
 
     </div>
 
+    <!-- RIGHT PANEL -->
     <div class="panel">
       <div class="panel-title">Life Preview</div>
-      <div class="card" id="preview"></div>
+      <div class="card" id="preview">Create your character...</div>
     </div>
 
   </div>
