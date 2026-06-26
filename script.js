@@ -1,10 +1,28 @@
 let step = 1;
 
-setTimeout(() => {
-  document.getElementById("loading").style.display = "none";
-  document.getElementById("app").classList.remove("hidden");
-}, 2000);
+/* SAFER LOADING SCREEN REMOVAL */
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    const loader = document.getElementById("loading");
+    const app = document.getElementById("app");
 
+    if (loader) {
+      loader.style.opacity = "0";
+      loader.style.transition = "0.5s ease";
+      
+      setTimeout(() => {
+        loader.style.display = "none";
+      }, 600);
+    }
+
+    if (app) {
+      app.classList.remove("hidden");
+    }
+
+  }, 1500);
+});
+
+/* STEP SYSTEM */
 function showStep() {
   document.querySelectorAll(".step").forEach(s => s.classList.remove("show"));
   document.getElementById("step" + step).classList.add("show");
@@ -22,6 +40,7 @@ function prevStep() {
   updateUI();
 }
 
+/* STATES */
 const states = {
   US: ["California", "Texas", "Florida"],
   CA: ["Ontario", "Quebec"],
@@ -32,7 +51,9 @@ const states = {
 function updateStates() {
   const c = document.getElementById("country").value;
   const s = document.getElementById("state");
+
   s.innerHTML = "";
+
   (states[c] || []).forEach(x => {
     let o = document.createElement("option");
     o.textContent = x;
@@ -40,6 +61,7 @@ function updateStates() {
   });
 }
 
+/* LIVE UI */
 function updateUI() {
   const name = document.getElementById("name").value || "Unknown";
   const gender = document.getElementById("gender").value;
@@ -52,10 +74,12 @@ function updateUI() {
     name + " is beginning their life journey...";
 }
 
+/* START GAME */
 function startGame() {
   document.getElementById("story").textContent =
-    "You were born into a world full of opportunity... but your choices will define everything.";
+    "Your story begins... every choice matters.";
 }
 
+/* INIT */
 showStep();
 updateUI();
