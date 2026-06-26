@@ -1,8 +1,8 @@
 let player = {
     name: "",
-    age: 18,
-    health: 80,
-    happiness: 80,
+    age: 0,
+    health: 100,
+    happiness: 100,
     smarts: 70,
     looks: 70,
     money: 0,
@@ -10,72 +10,87 @@ let player = {
 };
 
 /* SCREEN SWITCH */
-function showMenu(){
-    switchScreen("menuScreen");
-}
-
-function showCreator(){
-    switchScreen("creatorScreen");
-}
-
-function startGame(){
-
-let first = document.getElementById("first").value || "John";
-let last = document.getElementById("last").value || "Doe";
-
-player.name = first + " " + last;
-
-switchScreen("gameScreen");
-
-updateUI();
-}
-
-/* CORE SCREEN ENGINE */
-function switchScreen(id){
+function show(screen){
     document.querySelectorAll(".screen").forEach(s=>{
         s.classList.remove("active");
     });
-    document.getElementById(id).classList.add("active");
+    document.getElementById(screen).classList.add("active");
 }
 
-/* TAB SYSTEM */
-function setTab(tab){
-
-document.querySelectorAll(".tab").forEach(t=>{
-    t.classList.remove("activeTab");
-});
-
-document.getElementById(tab + "Tab").classList.add("activeTab");
-
+/* NAV */
+function showCreator(){
+    show("creatorScreen");
 }
 
-/* AGE UP */
+function showMenu(){
+    show("menuScreen");
+}
+
+/* START GAME */
+function startGame(){
+
+let first = document.getElementById("first").value || "New";
+let last = document.getElementById("last").value || "Born";
+
+player.name = first + " " + last;
+player.age = 0;
+
+show("gameScreen");
+updateUI();
+
+addLog("You were born into the world.");
+}
+
+/* AGE UP SYSTEM (REAL BITLIFE STYLE) */
 function ageUp(){
 
 player.age++;
 
+/* yearly decay + randomness */
+player.health += rand(-3, 2);
+player.happiness += rand(-4, 4);
+player.smarts += rand(0, 2);
+player.looks += rand(-2, 1);
+player.money += rand(0, 50);
+
+/* events */
 let events = [
-"You had a normal day.",
-"You got sick.",
-"You found $20.",
-"You worked hard and improved yourself."
+"You had a peaceful year.",
+"You got sick as a child.",
+"You learned something new.",
+"You had a fun day with family.",
+"You fell and got a small injury."
 ];
 
 let e = events[Math.floor(Math.random()*events.length)];
-player.log.push(e);
+addLog("Age " + player.age + ": " + e);
 
-if(e.includes("sick")) player.health -= 5;
-if(e.includes("$")) player.money += 20;
-if(e.includes("worked")) player.happiness += 5;
+/* clamp stats */
+clampStats();
 
 updateUI();
+}
+
+/* LOG SYSTEM */
+function addLog(text){
+player.log.push(text);
 renderLog();
+}
+
+function renderLog(){
+let log = document.getElementById("log");
+log.innerHTML = "";
+
+player.log.slice(-6).forEach(e=>{
+    log.innerHTML += "<div>• " + e + "</div>";
+});
 }
 
 /* UI UPDATE */
 function updateUI(){
 
 document.getElementById("name").innerText = player.name;
+
 document.getElementById("ageDisplay").innerText = "Age: " + player.age;
 
 document.getElementById("health").innerText = player.health;
@@ -83,16 +98,20 @@ document.getElementById("happiness").innerText = player.happiness;
 document.getElementById("smarts").innerText = player.smarts;
 document.getElementById("looks").innerText = player.looks;
 document.getElementById("money").innerText = player.money;
+
 }
 
-/* LOG */
-function renderLog(){
+/* STAT LIMITS */
+function clampStats(){
 
-let log = document.getElementById("log");
-log.innerHTML = "";
+player.health = Math.max(0, Math.min(100, player.health));
+player.happiness = Math.max(0, Math.min(100, player.happiness));
+player.smarts = Math.max(0, Math.min(100, player.smarts));
+player.looks = Math.max(0, Math.min(100, player.looks));
 
-player.log.slice(-6).forEach(e=>{
-    log.innerHTML += "<div>• " + e + "</div>";
-});
+}
 
+/* RANDOM HELPER */
+function rand(min,max){
+return Math.floor(Math.random()*(max-min+1))+min;
 }
