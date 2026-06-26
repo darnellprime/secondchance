@@ -5,7 +5,7 @@ body {
   color: white;
 }
 
-/* LOADING SCREEN */
+/* LOADING */
 #loading-screen {
   position: fixed;
   width: 100%;
@@ -15,10 +15,6 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.logo img {
-  filter: drop-shadow(0 0 10px #00ffd5);
 }
 
 .loader {
@@ -44,34 +40,31 @@ body {
   100% { transform: translateX(250%); }
 }
 
-.hidden {
-  display: none;
-}
+.hidden { display: none; }
 
-/* HEADER */
+/* LAYOUT */
 .top-bar {
-  padding: 30px 40px 0;
+  padding: 25px 40px;
 }
 
 .top-bar h1 {
   margin: 0;
-  font-size: 38px;
+  font-size: 40px;
 }
 
 .top-bar p {
   color: #aaa;
 }
 
-/* CREATOR LAYOUT */
 .creator {
   display: flex;
   gap: 30px;
   padding: 40px;
 }
 
-/* LEFT PANEL */
+/* PANEL */
 .glass-panel {
-  width: 340px;
+  width: 360px;
   padding: 25px;
   border-radius: 16px;
 
@@ -79,74 +72,85 @@ body {
   backdrop-filter: blur(12px);
 
   border: 1px solid rgba(0, 255, 213, 0.15);
-
-  box-shadow: 0 0 30px rgba(0, 255, 213, 0.08);
 }
 
-.panel-title {
-  font-size: 20px;
-  margin-bottom: 20px;
+/* STEP TITLE */
+.step-title {
+  font-size: 18px;
   color: #00ffd5;
-  font-weight: bold;
+  margin-bottom: 15px;
 }
 
-.glass-panel input,
-.glass-panel select {
+/* STEPS */
+.step input,
+.step select {
   width: 100%;
   padding: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 
   border: none;
   border-radius: 10px;
 
-  background: rgba(10, 10, 15, 0.9);
+  background: rgba(10,10,15,0.9);
+  color: white;
+}
+
+/* NAV */
+.nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.nav-buttons button {
+  flex: 1;
+  margin: 5px;
+  padding: 10px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #222;
   color: white;
 
-  outline: none;
+  cursor: pointer;
 }
 
-.glass-panel input:focus,
-.glass-panel select:focus {
-  box-shadow: 0 0 10px #00ffd5;
-}
-
-.glass-panel button {
+.start-btn {
   width: 100%;
+  margin-top: 10px;
   padding: 12px;
 
+  background: linear-gradient(90deg, #00ffd5, #00a3ff);
   border: none;
   border-radius: 10px;
 
-  background: linear-gradient(90deg, #00ffd5, #00a3ff);
-  color: black;
-
   font-weight: bold;
+  color: black;
   cursor: pointer;
-
-  transition: 0.2s;
 }
 
-.glass-panel button:hover {
-  transform: scale(1.03);
+/* PORTRAIT */
+.portrait {
+  font-size: 80px;
+  text-align: center;
+  margin-top: 20px;
 }
 
-/* RIGHT PANEL */
+/* PREVIEW */
 .preview-card {
   flex: 1;
   padding: 30px;
-  border-radius: 16px;
 
   background: radial-gradient(circle at top, #1a1a2e, #0b0b0f);
+  border-radius: 16px;
 
   border: 1px solid rgba(255,255,255,0.05);
-
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
 }
 
 .preview-title {
   font-size: 22px;
-  margin-bottom: 15px;
-  color: white;
+  margin-bottom: 10px;
 }
 
 #previewText {

@@ -7,12 +7,11 @@
 </head>
 <body>
 
-<!-- LOADING SCREEN -->
+<!-- LOADING -->
 <div id="loading-screen">
   <div class="logo">
     <img src="assets/logo.png" width="180">
   </div>
-
   <div class="loader"></div>
   <p>Loading your second chance...</p>
 </div>
@@ -22,54 +21,81 @@
 
   <div class="top-bar">
     <h1>Second Chance</h1>
-    <p>Build your life from scratch</p>
+    <p>Your life begins now...</p>
   </div>
 
   <div class="creator">
 
+    <!-- LEFT: STEP PANEL -->
     <div class="glass-panel">
 
-      <div class="panel-title">Character Creator</div>
+      <div class="step-title" id="stepTitle">Step 1: Identity</div>
 
-      <input type="text" id="name" placeholder="Full Name">
-      <input type="number" id="age" value="18">
+      <!-- STEP 1 -->
+      <div class="step" id="step1">
 
-      <select id="gender">
-        <option>Male</option>
-        <option>Female</option>
-        <option>Other</option>
-      </select>
+        <input type="text" id="name" placeholder="Full Name">
 
-      <select id="country" onchange="updateStates()">
-        <option value="">Select Country</option>
-        <option value="US">???? United States</option>
-        <option value="CA">???? Canada</option>
-        <option value="MX">???? Mexico</option>
-        <option value="UK">???? United Kingdom</option>
-        <option value="JP">???? Japan</option>
-        <option value="DE">???? Germany</option>
-      </select>
+        <select id="gender">
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other</option>
+        </select>
 
-      <select id="state">
-        <option>Select Country First</option>
-      </select>
+        <input type="number" id="age" value="18">
 
-      <button onclick="startGame()">Start Life</button>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="step hidden" id="step2">
+
+        <select id="country" onchange="updateStates()">
+          <option value="">Select Country</option>
+          <option value="US">???? United States</option>
+          <option value="CA">???? Canada</option>
+          <option value="MX">???? Mexico</option>
+          <option value="UK">???? United Kingdom</option>
+          <option value="JP">???? Japan</option>
+          <option value="DE">???? Germany</option>
+        </select>
+
+        <select id="state">
+          <option>Select Country First</option>
+        </select>
+
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="step hidden" id="step3">
+        <div class="portrait" id="portrait">??</div>
+        <p class="hint">Your character avatar will appear here</p>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="step hidden" id="step4">
+        <div id="story"></div>
+      </div>
+
+      <!-- NAV -->
+      <div class="nav-buttons">
+        <button onclick="prevStep()">Back</button>
+        <button onclick="nextStep()">Next</button>
+      </div>
+
+      <button class="start-btn" onclick="startGame()">Start Life</button>
 
     </div>
 
+    <!-- RIGHT PREVIEW -->
     <div class="preview-card">
 
       <div class="preview-title">Life Preview</div>
 
-      <div id="previewText">
-        Fill out your character to begin...
-      </div>
+      <div id="previewText">Start building your life...</div>
 
     </div>
 
   </div>
-
 </div>
 
 <script src="script.js"></script>

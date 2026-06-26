@@ -1,50 +1,75 @@
-// LOADING SCREEN
+// LOAD
 setTimeout(() => {
   document.getElementById("loading-screen").style.display = "none";
   document.getElementById("game").classList.remove("hidden");
 }, 2500);
 
-// STATES DATA
+// STATE DATA
 const statesByCountry = {
-  US: ["Alabama", "Alaska", "California", "Florida", "New York", "Texas"],
-  CA: ["Alberta", "British Columbia", "Ontario", "Quebec"],
-  MX: ["Jalisco", "Nuevo León", "Chihuahua"],
-  UK: ["England", "Scotland", "Wales", "Northern Ireland"],
-  JP: ["Tokyo", "Osaka", "Hokkaido"],
-  DE: ["Bavaria", "Berlin", "Hamburg"]
+  US: ["California", "Texas", "New York"],
+  CA: ["Ontario", "Quebec"],
+  MX: ["Jalisco", "Nuevo León"],
+  UK: ["England", "Scotland"],
+  JP: ["Tokyo", "Osaka"],
+  DE: ["Berlin", "Bavaria"]
 };
 
-// UPDATE STATES
+let step = 1;
+
+// NAV
+function nextStep() {
+  if (step < 4) step++;
+  updateSteps();
+}
+
+function prevStep() {
+  if (step > 1) step--;
+  updateSteps();
+}
+
+// UPDATE UI STEPS
+function updateSteps() {
+
+  for (let i = 1; i <= 4; i++) {
+    document.getElementById("step" + i).classList.add("hidden");
+  }
+
+  document.getElementById("step" + step).classList.remove("hidden");
+
+  const titles = [
+    "Step 1: Identity",
+    "Step 2: Location",
+    "Step 3: Appearance",
+    "Step 4: Life Story"
+  ];
+
+  document.getElementById("stepTitle").innerText = titles[step - 1];
+
+  generatePreview();
+  generateStory();
+}
+
+// STATES
 function updateStates() {
   const country = document.getElementById("country").value;
   const stateSelect = document.getElementById("state");
 
   stateSelect.innerHTML = "";
 
-  if (!statesByCountry[country]) {
-    stateSelect.innerHTML = "<option>No states available</option>";
-    return;
-  }
+  if (!statesByCountry[country]) return;
 
-  statesByCountry[country].forEach(state => {
-    const opt = document.createElement("option");
-    opt.value = state;
-    opt.innerText = state;
+  statesByCountry[country].forEach(s => {
+    let opt = document.createElement("option");
+    opt.value = s;
+    opt.innerText = s;
     stateSelect.appendChild(opt);
   });
-
-  updatePreview();
 }
 
-// LIVE INPUT
-["name", "age", "gender", "country", "state"].forEach(id => {
-  document.getElementById(id).addEventListener("input", updatePreview);
-});
-
 // PREVIEW
-function updatePreview() {
+function generatePreview() {
   const name = document.getElementById("name").value || "Unknown";
-  const age = document.getElementById("age").value;
+  const age = document.getElementById("age").value || "18";
   const gender = document.getElementById("gender").value;
 
   const country = document.getElementById("country").value;
@@ -54,10 +79,24 @@ function updatePreview() {
 `Name: ${name}
 Age: ${age}
 Gender: ${gender}
-Location: ${state ? state + "," : ""} ${country}`;
+Location: ${state ? state + ", " : ""}${country}`;
+}
+
+// STORY GENERATOR
+function generateStory() {
+  const stories = [
+    "You were born into a struggling household in a quiet city.",
+    "Your family moved frequently, never staying in one place long.",
+    "You grew up in a wealthy suburban neighborhood with strict parents.",
+    "Life started rough — but you always had ambition burning inside you.",
+    "A mysterious event in your childhood shaped your future path."
+  ];
+
+  document.getElementById("story").innerText =
+    stories[Math.floor(Math.random() * stories.length)];
 }
 
 // START GAME
 function startGame() {
-  alert("Character created — Next step: Life Simulation System");
+  alert("Life begins... (next: full simulation system)");
 }
