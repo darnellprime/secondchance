@@ -1,15 +1,28 @@
 let player = {
     name: "",
     age: 0,
+
+    stage: "baby",
+
     health: 100,
     happiness: 100,
-    smarts: 70,
-    looks: 70,
+    smarts: 50,
+    looks: 50,
+
     money: 0,
+
+    job: null,
+    salary: 0,
+
+    school: "none",
+    grade: 0,
+
+    crimeLevel: 0,
+
     log: []
 };
 
-/* SCREEN SWITCH */
+/* SCREEN SYSTEM */
 function show(screen){
     document.querySelectorAll(".screen").forEach(s=>{
         s.classList.remove("active");
@@ -18,13 +31,8 @@ function show(screen){
 }
 
 /* NAV */
-function showCreator(){
-    show("creatorScreen");
-}
-
-function showMenu(){
-    show("menuScreen");
-}
+function showCreator(){ show("creatorScreen"); }
+function showMenu(){ show("menuScreen"); }
 
 /* START GAME */
 function startGame(){
@@ -33,7 +41,6 @@ let first = document.getElementById("first").value || "New";
 let last = document.getElementById("last").value || "Born";
 
 player.name = first + " " + last;
-player.age = 0;
 
 show("gameScreen");
 updateUI();
@@ -41,56 +48,151 @@ updateUI();
 addLog("You were born into the world.");
 }
 
-/* AGE UP SYSTEM (REAL BITLIFE STYLE) */
+/* AGE SYSTEM */
 function ageUp(){
 
 player.age++;
 
-/* yearly decay + randomness */
-player.health += rand(-3, 2);
-player.happiness += rand(-4, 4);
-player.smarts += rand(0, 2);
-player.looks += rand(-2, 1);
-player.money += rand(0, 50);
+/* LIFE STAGES */
+if(player.age === 3) player.stage = "child";
+if(player.age === 13) player.stage = "teen";
+if(player.age === 18) player.stage = "adult";
 
-/* events */
+/* SCHOOL SYSTEM */
+if(player.age < 18){
+    player.school = "School";
+    player.grade += rand(1,2);
+}
+
+/* JOB SYSTEM */
+if(player.age >= 18 && !player.job){
+    tryGetJob();
+}
+
+/* MONEY */
+if(player.job){
+    player.money += player.salary;
+}
+
+/* RANDOM EVENTS */
+runEvents();
+
+/* STAT DECAY */
+player.health += rand(-3,1);
+player.happiness += rand(-4,3);
+player.smarts += rand(0,2);
+
+/* CRIME CONSEQUENCE */
+if(player.crimeLevel > 5 && Math.random() < 0.2){
+    addLog("You got caught and fined!");
+    player.money -= 200;
+}
+
+/* CLAMP */
+clamp();
+
+/* UPDATE */
+updateUI();
+renderLog();
+}
+
+/* JOB SYSTEM */
+function tryGetJob(){
+
+let jobs = [
+{title:"Retail Worker",salary:2000},
+{title:"Fast Food Worker",salary:1800},
+{title:"Office Assistant",salary:2500}
+];
+
+let job = jobs[Math.floor(Math.random()*jobs.length)];
+
+player.job = job.title;
+player.salary = job.salary;
+
+addLog("You got a job as a " + job.title);
+}
+
+/* EVENTS */
+function runEvents(){
+
 let events = [
-"You had a peaceful year.",
-"You got sick as a child.",
-"You learned something new.",
-"You had a fun day with family.",
-"You fell and got a small injury."
+
+"You had a normal day.",
+"You felt motivated.",
+"You argued with someone.",
+"You found $50.",
+"You studied hard.",
+"You got sick."
+
 ];
 
 let e = events[Math.floor(Math.random()*events.length)];
-addLog("Age " + player.age + ": " + e);
 
-/* clamp stats */
-clampStats();
+if(e.includes("found $")) player.money += 50;
+if(e.includes("sick")) player.health -= 10;
+if(e.includes("motivated")) player.happiness += 5;
+
+addLog("Age " + player.age + ": " + e);
+}
+
+/* CRIME */
+function commitCrime(){
+
+let success = Math.random() > 0.5;
+
+if(success){
+    player.money += 100;
+    player.crimeLevel += 2;
+    addLog("You committed a small crime and made money.");
+}else{
+    player.crimeLevel += 5;
+    player.happiness -= 10;
+    addLog("You got caught doing a crime!");
+}
 
 updateUI();
 }
 
-/* LOG SYSTEM */
-function addLog(text){
-player.log.push(text);
-renderLog();
+/* SAVE SYSTEM */
+function saveGame(){
+localStorage.setItem("secondChance", JSON.stringify(player));
+addLog("Game saved.");
 }
 
+/* LOAD SYSTEM */
+function loadGame(){
+let data = localStorage.getItem("secondChance");
+if(!data) return;
+
+player = JSON.parse(data);
+
+show("gameScreen");
+updateUI();
+renderLog();
+
+addLog("Game loaded.");
+}
+
+/* LOG */
+function addLog(text){
+player.log.push(text);
+}
+
+/* RENDER LOG */
 function renderLog(){
 let log = document.getElementById("log");
 log.innerHTML = "";
 
-player.log.slice(-6).forEach(e=>{
+player.log.slice(-8).forEach(e=>{
     log.innerHTML += "<div>• " + e + "</div>";
 });
 }
 
-/* UI UPDATE */
+/* UI */
 function updateUI(){
 
 document.getElementById("name").innerText = player.name;
-
 document.getElementById("ageDisplay").innerText = "Age: " + player.age;
 
 document.getElementById("health").innerText = player.health;
@@ -101,17 +203,16 @@ document.getElementById("money").innerText = player.money;
 
 }
 
-/* STAT LIMITS */
-function clampStats(){
+/* CLAMP */
+function clamp(){
 
-player.health = Math.max(0, Math.min(100, player.health));
-player.happiness = Math.max(0, Math.min(100, player.happiness));
-player.smarts = Math.max(0, Math.min(100, player.smarts));
-player.looks = Math.max(0, Math.min(100, player.looks));
+player.health = Math.max(0,Math.min(100,player.health));
+player.happiness = Math.max(0,Math.min(100,player.happiness));
+player.smarts = Math.max(0,Math.min(100,player.smarts));
 
 }
 
-/* RANDOM HELPER */
+/* RANDOM */
 function rand(min,max){
 return Math.floor(Math.random()*(max-min+1))+min;
 }

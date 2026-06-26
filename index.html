@@ -12,8 +12,8 @@
 
 <!-- TOP BAR -->
 <div id="topbar">
-    <div id="title">SECOND CHANCE</div>
-    <div id="ageDisplay">Age: 18</div>
+    <div>SECOND CHANCE</div>
+    <div id="ageDisplay">Age: 0</div>
 </div>
 
 <!-- MENU SCREEN -->
@@ -23,14 +23,14 @@
         <p>Life Simulator</p>
 
         <button onclick="showCreator()">New Life</button>
-        <button onclick="alert('No save yet')">Continue</button>
+        <button onclick="loadGame()">Continue</button>
     </div>
 </div>
 
-<!-- CREATOR -->
+<!-- CREATOR SCREEN -->
 <div id="creatorScreen" class="screen">
     <div class="card">
-        <h2>Create Character</h2>
+        <h2>Create Your Life</h2>
 
         <input id="first" placeholder="First Name">
         <input id="last" placeholder="Last Name">
@@ -45,10 +45,10 @@
     </div>
 </div>
 
-<!-- GAME UI -->
+<!-- GAME SCREEN -->
 <div id="gameScreen" class="screen">
 
-    <!-- LEFT NAV -->
+    <!-- SIDEBAR -->
     <div id="sidebar">
         <button onclick="setTab('life')">Life</button>
         <button onclick="setTab('stats')">Stats</button>
@@ -57,14 +57,15 @@
         <button onclick="setTab('activity')">Activity</button>
     </div>
 
-    <!-- MAIN PANEL -->
+    <!-- MAIN CONTENT -->
     <div id="main">
 
+        <!-- LIFE TAB -->
         <div id="lifeTab" class="tab activeTab">
             <h2 id="name"></h2>
 
             <div class="card">
-                <p id="lifeText">Start your journey...</p>
+                <p>Your journey begins...</p>
             </div>
 
             <button onclick="ageUp()">AGE UP ?</button>
@@ -72,6 +73,7 @@
             <div id="log"></div>
         </div>
 
+        <!-- STATS -->
         <div id="statsTab" class="tab">
             <div class="card">
                 <p>Health: <span id="health"></span></p>
@@ -82,25 +84,27 @@
             </div>
         </div>
 
+        <!-- RELATIONS -->
         <div id="relationsTab" class="tab">
             <div class="card">
-                <p>Parents: Not implemented yet</p>
-                <p>Friends: Not implemented yet</p>
+                <p>Parents: Not added yet</p>
+                <p>Friends: Not added yet</p>
             </div>
         </div>
 
+        <!-- JOBS -->
         <div id="jobsTab" class="tab">
             <div class="card">
-                <p>No job yet.</p>
+                <p>No job yet</p>
             </div>
         </div>
 
+        <!-- ACTIVITY -->
         <div id="activityTab" class="tab">
             <div class="card">
-                <p>Gym</p>
-                <p>Study</p>
-                <p>Work Out</p>
-                <p>Relax</p>
+                <button onclick="commitCrime()">Commit Crime</button>
+                <button onclick="saveGame()">Save Game</button>
+                <button onclick="loadGame()">Load Game</button>
             </div>
         </div>
 
