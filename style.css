@@ -1,98 +1,94 @@
 body{
-    margin:0;
-    font-family:Arial;
-    background:#050508;
-    color:white;
-    overflow:hidden;
+margin:0;
+font-family:Arial;
+background:#050508;
+color:white;
+overflow:hidden;
 }
 
 #topbar{
-    height:52px;
-    background:#0a0a0f;
-    border-bottom:1px solid #2a0000;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:0 16px;
+height:52px;
+background:#0a0a0f;
+border-bottom:1px solid #300000;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:0 16px;
 }
 
-/* SCREEN */
 .screen{display:none;width:100vw;height:calc(100vh - 52px);}
 .active{display:flex !important;}
 
-/* CARD */
-.card{
-    width:340px;
-    background:#0f0f14;
-    border:1px solid #2a0000;
-    border-radius:16px;
-    padding:20px;
-}
-
-/* SIDEBAR */
 #sidebar{
-    width:140px;
-    background:#0a0a0f;
-    border-right:1px solid #2a0000;
-    padding:10px;
+width:140px;
+background:#0a0a0f;
+border-right:1px solid #300000;
+padding:10px;
 }
 
-/* MAIN */
 #gameScreen{display:flex;}
 #main{flex:1;padding:15px;}
 
-/* TABS */
 .tab{display:none;}
 .activeTab{display:block;}
 
-/* AGE BUTTON */
+.card{
+background:#0f0f14;
+border:1px solid #300000;
+padding:15px;
+border-radius:12px;
+}
+
 #ageBtn{
-    width:100px;
-    height:100px;
-    border-radius:50%;
-    background:red;
-    color:white;
-    border:none;
-    margin:20px auto;
-    display:block;
+width:100px;
+height:100px;
+border-radius:50%;
+background:red;
+color:white;
+border:none;
+margin:20px auto;
+display:block;
 }
 
-/* LOG */
 #log{
-    margin-top:10px;
-    font-size:12px;
-    background:#0b0b10;
-    padding:10px;
-    border:1px solid #2a0000;
-    border-radius:10px;
-    max-height:200px;
-    overflow-y:auto;
+margin-top:10px;
+font-size:12px;
+max-height:200px;
+overflow-y:auto;
 }
 
-/* POPUP SYSTEM */
+.bar{
+height:10px;
+background:#222;
+border-radius:20px;
+margin:6px 0;
+overflow:hidden;
+}
+
+.fill{
+height:100%;
+background:red;
+width:50%;
+}
+
 #popup{
-    position:fixed;
-    top:20px;
-    right:20px;
-    width:260px;
+position:fixed;
+top:20px;
+right:20px;
+width:260px;
 }
 
-.popupBox{
-    background:#111;
-    border:1px solid red;
-    padding:10px;
-    margin-bottom:10px;
-    border-radius:10px;
-    animation:fade 3s forwards;
+.popup{
+background:#111;
+border:1px solid red;
+padding:10px;
+margin-bottom:10px;
+animation:fade 3s forwards;
 }
 
 @keyframes fade{
-    0%{opacity:0;transform:translateY(-10px);}
-    10%{opacity:1;}
-    90%{opacity:1;}
-    100%{opacity:0;transform:translateY(-20px);}
+0%{opacity:0;}
+10%{opacity:1;}
+90%{opacity:1;}
+100%{opacity:0;}
 }
-
-/* STAT BARS */
-.bar{height:10px;background:#222;border-radius:20px;overflow:hidden;}
-.fill{height:100%;background:red;width:50%;}

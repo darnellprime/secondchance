@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Second Chance</title>
+<title>Second Chance v0.0.05</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -19,14 +19,13 @@
 <div id="menuScreen" class="screen active">
     <div class="card">
         <h1>Second Chance</h1>
-        <p>Life Simulator</p>
-
+        <p>Life Simulation Engine</p>
         <button onclick="showCreator()">New Life</button>
         <button onclick="loadGame()">Continue</button>
     </div>
 </div>
 
-<!-- CHARACTER CREATOR -->
+<!-- CREATOR -->
 <div id="creatorScreen" class="screen">
     <div class="card">
         <h2>Create Character</h2>
@@ -34,16 +33,14 @@
         <input id="first" placeholder="First Name">
         <input id="last" placeholder="Last Name">
 
-        <label>Appearance</label>
+        <label>Starting Stats</label>
         <input type="range" id="looks" min="0" max="100" value="50">
-
-        <label>Smarts</label>
         <input type="range" id="smarts" min="0" max="100" value="50">
 
         <label>Starting Money</label>
         <input type="range" id="money" min="0" max="5000" value="500">
 
-        <button onclick="startGame()">Start Life</button>
+        <button onclick="startGame()">Begin Life</button>
         <button onclick="showMenu()">Back</button>
     </div>
 </div>
@@ -51,7 +48,6 @@
 <!-- GAME -->
 <div id="gameScreen" class="screen">
 
-    <!-- SIDEBAR -->
     <div id="sidebar">
         <button onclick="setTab('life')">Life</button>
         <button onclick="setTab('stats')">Stats</button>
@@ -62,7 +58,6 @@
         <button onclick="setTab('activity')">Activity</button>
     </div>
 
-    <!-- MAIN -->
     <div id="main">
 
         <!-- LIFE -->
@@ -77,11 +72,11 @@
         <!-- STATS -->
         <div id="statsTab" class="tab">
             <div class="card">
-                <div class="stat"><div class="label">Health</div><div class="bar"><div id="healthBar" class="fill"></div></div></div>
-                <div class="stat"><div class="label">Happiness</div><div class="bar"><div id="happinessBar" class="fill"></div></div></div>
-                <div class="stat"><div class="label">Smarts</div><div class="bar"><div id="smartsBar" class="fill"></div></div></div>
-                <div class="stat"><div class="label">Looks</div><div class="bar"><div id="looksBar" class="fill"></div></div></div>
-                <div class="stat"><div class="label">Money</div><div class="bar"><div id="moneyBar" class="fill"></div></div></div>
+                <div class="bar"><div id="healthBar" class="fill"></div></div>
+                <div class="bar"><div id="happinessBar" class="fill"></div></div>
+                <div class="bar"><div id="smartsBar" class="fill"></div></div>
+                <div class="bar"><div id="looksBar" class="fill"></div></div>
+                <div class="bar"><div id="moneyBar" class="fill"></div></div>
             </div>
         </div>
 
@@ -89,7 +84,8 @@
         <div id="schoolTab" class="tab">
             <div class="card">
                 <p>School: <span id="school"></span></p>
-                <p>Grade: <span id="grade"></span></p>
+                <p>College: <span id="college"></span></p>
+                <p>Degree: <span id="degree"></span></p>
             </div>
         </div>
 
@@ -98,13 +94,15 @@
             <div class="card">
                 <p>Job: <span id="job"></span></p>
                 <p>Salary: $<span id="salary"></span></p>
+                <p>Rank: <span id="jobRank"></span></p>
             </div>
         </div>
 
         <!-- SOCIAL -->
         <div id="socialTab" class="tab">
             <div class="card">
-                <p>Dating: <span id="partner">None</span></p>
+                <p>Partner: <span id="partner">None</span></p>
+                <p>Children: <span id="children">0</span></p>
             </div>
         </div>
 
@@ -113,15 +111,15 @@
             <div class="card">
                 <p>House: <span id="house">None</span></p>
                 <p>Car: <span id="car">None</span></p>
-                <p>Clothing: Basic</p>
             </div>
         </div>
 
         <!-- ACTIVITY -->
         <div id="activityTab" class="tab">
             <div class="card">
-                <button onclick="commitCrime()">Commit Crime</button>
-                <button onclick="goDating()">Go Dating</button>
+                <button onclick="goDating()">Date</button>
+                <button onclick="goCollege()">Go to College</button>
+                <button onclick="commitCrime()">Crime</button>
                 <button onclick="buyHouse()">Buy House</button>
                 <button onclick="buyCar()">Buy Car</button>
                 <button onclick="saveGame()">Save</button>
