@@ -1,0 +1,1 @@
+const relationships = ["Mom","Dad","Friend"];

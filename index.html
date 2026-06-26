@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Second Chance</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- MENU -->
+<div id="menu" class="screen active">
+    <div class="panel">
+        <h1>SECOND CHANCE</h1>
+        <p>Life Simulator v0.0.01</p>
+
+        <button onclick="newLife()">New Life</button>
+        <button onclick="loadLife()">Continue</button>
+    </div>
+</div>
+
+<!-- CREATOR -->
+<div id="creator" class="screen hidden">
+    <div class="panel">
+        <h2>Create Character</h2>
+
+        <input id="firstName" placeholder="First Name">
+        <input id="lastName" placeholder="Last Name">
+
+        <select id="gender">
+            <option>Male</option>
+            <option>Female</option>
+        </select>
+
+        <button onclick="startLife()">Start Life</button>
+        <button onclick="backMenu()">Back</button>
+    </div>
+</div>
+
+<!-- GAME -->
+<div id="game" class="screen hidden">
+    <div class="panel">
+
+        <h2 id="charName"></h2>
+        <p id="ageText"></p>
+
+        <div class="stats">
+            <p>Health: <span id="health"></span></p>
+            <p>Happiness: <span id="happiness"></span></p>
+            <p>Smarts: <span id="smarts"></span></p>
+            <p>Looks: <span id="looks"></span></p>
+            <p>Money: $<span id="money"></span></p>
+        </div>
+
+        <button onclick="ageUp()">Age Up</button>
+
+        <div id="eventLog"></div>
+
+    </div>
+</div>
+
+<script src="data/names.js"></script>
+<script src="data/states.js"></script>
+<script src="data/jobs.js"></script>
+<script src="data/events.js"></script>
+<script src="data/relationships.js"></script>
+
+<script src="script.js"></script>
+
+</body>
+</html>
