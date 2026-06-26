@@ -4,67 +4,108 @@
 <meta charset="UTF-8">
 <title>Second Chance</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- MENU -->
-<div id="menu" class="screen active">
-    <div class="panel">
-        <h1>SECOND CHANCE</h1>
-        <p>Life Simulator v0.0.01</p>
+<!-- TOP BAR -->
+<div id="topbar">
+    <div id="title">SECOND CHANCE</div>
+    <div id="ageDisplay">Age: 18</div>
+</div>
 
-        <button onclick="newLife()">New Life</button>
-        <button onclick="loadLife()">Continue</button>
+<!-- MENU SCREEN -->
+<div id="menuScreen" class="screen active">
+    <div class="card">
+        <h1>Second Chance</h1>
+        <p>Life Simulator</p>
+
+        <button onclick="showCreator()">New Life</button>
+        <button onclick="alert('No save yet')">Continue</button>
     </div>
 </div>
 
 <!-- CREATOR -->
-<div id="creator" class="screen hidden">
-    <div class="panel">
+<div id="creatorScreen" class="screen">
+    <div class="card">
         <h2>Create Character</h2>
 
-        <input id="firstName" placeholder="First Name">
-        <input id="lastName" placeholder="Last Name">
+        <input id="first" placeholder="First Name">
+        <input id="last" placeholder="Last Name">
 
         <select id="gender">
             <option>Male</option>
             <option>Female</option>
         </select>
 
-        <button onclick="startLife()">Start Life</button>
-        <button onclick="backMenu()">Back</button>
+        <button onclick="startGame()">Start Life</button>
+        <button onclick="showMenu()">Back</button>
     </div>
 </div>
 
-<!-- GAME -->
-<div id="game" class="screen hidden">
-    <div class="panel">
+<!-- GAME UI -->
+<div id="gameScreen" class="screen">
 
-        <h2 id="charName"></h2>
-        <p id="ageText"></p>
+    <!-- LEFT NAV -->
+    <div id="sidebar">
+        <button onclick="setTab('life')">Life</button>
+        <button onclick="setTab('stats')">Stats</button>
+        <button onclick="setTab('relations')">Relations</button>
+        <button onclick="setTab('jobs')">Jobs</button>
+        <button onclick="setTab('activity')">Activity</button>
+    </div>
 
-        <div class="stats">
-            <p>Health: <span id="health"></span></p>
-            <p>Happiness: <span id="happiness"></span></p>
-            <p>Smarts: <span id="smarts"></span></p>
-            <p>Looks: <span id="looks"></span></p>
-            <p>Money: $<span id="money"></span></p>
+    <!-- MAIN PANEL -->
+    <div id="main">
+
+        <div id="lifeTab" class="tab activeTab">
+            <h2 id="name"></h2>
+
+            <div class="card">
+                <p id="lifeText">Start your journey...</p>
+            </div>
+
+            <button onclick="ageUp()">AGE UP ?</button>
+
+            <div id="log"></div>
         </div>
 
-        <button onclick="ageUp()">Age Up</button>
+        <div id="statsTab" class="tab">
+            <div class="card">
+                <p>Health: <span id="health"></span></p>
+                <p>Happiness: <span id="happiness"></span></p>
+                <p>Smarts: <span id="smarts"></span></p>
+                <p>Looks: <span id="looks"></span></p>
+                <p>Money: $<span id="money"></span></p>
+            </div>
+        </div>
 
-        <div id="eventLog"></div>
+        <div id="relationsTab" class="tab">
+            <div class="card">
+                <p>Parents: Not implemented yet</p>
+                <p>Friends: Not implemented yet</p>
+            </div>
+        </div>
+
+        <div id="jobsTab" class="tab">
+            <div class="card">
+                <p>No job yet.</p>
+            </div>
+        </div>
+
+        <div id="activityTab" class="tab">
+            <div class="card">
+                <p>Gym</p>
+                <p>Study</p>
+                <p>Work Out</p>
+                <p>Relax</p>
+            </div>
+        </div>
 
     </div>
 </div>
-
-<script src="data/names.js"></script>
-<script src="data/states.js"></script>
-<script src="data/jobs.js"></script>
-<script src="data/events.js"></script>
-<script src="data/relationships.js"></script>
 
 <script src="script.js"></script>
 

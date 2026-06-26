@@ -1,102 +1,98 @@
 let player = {
-    firstName: "",
-    lastName: "",
-    gender: "",
+    name: "",
     age: 18,
     health: 80,
     happiness: 80,
     smarts: 70,
     looks: 70,
     money: 0,
-    events: []
+    log: []
 };
 
-// SCREEN SWITCH
-function show(screen){
+/* SCREEN SWITCH */
+function showMenu(){
+    switchScreen("menuScreen");
+}
+
+function showCreator(){
+    switchScreen("creatorScreen");
+}
+
+function startGame(){
+
+let first = document.getElementById("first").value || "John";
+let last = document.getElementById("last").value || "Doe";
+
+player.name = first + " " + last;
+
+switchScreen("gameScreen");
+
+updateUI();
+}
+
+/* CORE SCREEN ENGINE */
+function switchScreen(id){
     document.querySelectorAll(".screen").forEach(s=>{
         s.classList.remove("active");
-        s.classList.add("hidden");
     });
-
-    document.getElementById(screen).classList.remove("hidden");
-    document.getElementById(screen).classList.add("active");
+    document.getElementById(id).classList.add("active");
 }
 
-// MENU
-function newLife(){
-    show("creator");
+/* TAB SYSTEM */
+function setTab(tab){
+
+document.querySelectorAll(".tab").forEach(t=>{
+    t.classList.remove("activeTab");
+});
+
+document.getElementById(tab + "Tab").classList.add("activeTab");
+
 }
 
-function backMenu(){
-    show("menu");
-}
+/* AGE UP */
+function ageUp(){
 
-// START GAME
-function startLife(){
+player.age++;
 
-player.firstName = document.getElementById("firstName").value || "John";
-player.lastName = document.getElementById("lastName").value || "Doe";
-player.gender = document.getElementById("gender").value;
+let events = [
+"You had a normal day.",
+"You got sick.",
+"You found $20.",
+"You worked hard and improved yourself."
+];
 
-show("game");
+let e = events[Math.floor(Math.random()*events.length)];
+player.log.push(e);
+
+if(e.includes("sick")) player.health -= 5;
+if(e.includes("$")) player.money += 20;
+if(e.includes("worked")) player.happiness += 5;
+
 updateUI();
-
+renderLog();
 }
 
-// UPDATE UI
+/* UI UPDATE */
 function updateUI(){
 
-document.getElementById("charName").innerText =
-player.firstName + " " + player.lastName;
-
-document.getElementById("ageText").innerText =
-"Age: " + player.age;
+document.getElementById("name").innerText = player.name;
+document.getElementById("ageDisplay").innerText = "Age: " + player.age;
 
 document.getElementById("health").innerText = player.health;
 document.getElementById("happiness").innerText = player.happiness;
 document.getElementById("smarts").innerText = player.smarts;
 document.getElementById("looks").innerText = player.looks;
 document.getElementById("money").innerText = player.money;
-
 }
 
-// AGE UP SYSTEM
-function ageUp(){
-
-player.age++;
-
-let events = [
-"You had a good day.",
-"You got sick.",
-"You found $20.",
-"You felt motivated."
-];
-
-let e = events[Math.floor(Math.random()*events.length)];
-player.events.push(e);
-
-if(e.includes("sick")) player.health -= 5;
-if(e.includes("$")) player.money += 20;
-if(e.includes("good")) player.happiness += 5;
-
-updateUI();
-renderLog();
-
-}
-
-// LOG
+/* LOG */
 function renderLog(){
 
-let log = document.getElementById("eventLog");
+let log = document.getElementById("log");
 log.innerHTML = "";
 
-player.events.slice(-6).forEach(e=>{
+player.log.slice(-6).forEach(e=>{
     log.innerHTML += "<div>• " + e + "</div>";
 });
 
-}
-
-// LOAD
-function loadLife(){
-alert("No save system yet.");
 }

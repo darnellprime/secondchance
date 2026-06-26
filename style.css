@@ -1,37 +1,43 @@
 body {
     margin: 0;
     font-family: Arial;
-    background: #0f172a;
+    background: #0b1220;
     color: white;
-    text-align: center;
+}
+
+/* TOP BAR */
+#topbar {
+    height: 50px;
+    background: #111827;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    font-weight: bold;
 }
 
 /* SCREEN SYSTEM */
 .screen {
     display: none;
-    height: 100vh;
+    height: calc(100vh - 50px);
+}
+
+.active {
+    display: flex;
+}
+
+/* MENU */
+#menuScreen, #creatorScreen {
     justify-content: center;
     align-items: center;
 }
 
-.screen.active {
-    display: flex;
-}
-
-/* PANEL */
-.panel {
-    width: 420px;
-    background: rgba(255,255,255,0.06);
-    padding: 25px;
-    border-radius: 16px;
-    border: 1px solid rgba(255,255,255,0.1);
-}
-
-/* INPUTS */
-input, select {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
+/* CARD */
+.card {
+    background: #1f2937;
+    padding: 20px;
+    border-radius: 12px;
+    margin: 10px;
 }
 
 /* BUTTONS */
@@ -39,27 +45,59 @@ button {
     width: 100%;
     padding: 10px;
     margin-top: 10px;
-    background: #3b82f6;
     border: none;
+    background: #2563eb;
     color: white;
     cursor: pointer;
     border-radius: 10px;
 }
 
-/* STATS */
-.stats {
-    margin-top: 10px;
-    text-align: left;
-    background: rgba(0,0,0,0.3);
+/* INPUTS */
+input, select {
+    width: 100%;
     padding: 10px;
-    border-radius: 10px;
+    margin-top: 8px;
+    border-radius: 8px;
+    border: none;
+    background: #111827;
+    color: white;
 }
 
-/* EVENT LOG */
-#eventLog {
+/* GAME LAYOUT */
+#gameScreen {
+    display: flex;
+}
+
+/* SIDEBAR */
+#sidebar {
+    width: 120px;
+    background: #111827;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+#sidebar button {
+    margin-bottom: 10px;
+}
+
+/* MAIN */
+#main {
+    flex: 1;
+    padding: 15px;
+}
+
+/* TABS */
+.tab {
+    display: none;
+}
+
+.activeTab {
+    display: block;
+}
+
+/* LOG */
+#log {
     margin-top: 10px;
     font-size: 12px;
-    text-align: left;
-    max-height: 120px;
-    overflow-y: auto;
 }
