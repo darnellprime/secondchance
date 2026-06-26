@@ -9,20 +9,20 @@ overflow:hidden;
 #topbar{
 height:52px;
 background:#0a0a0f;
-border-bottom:1px solid #300000;
+border-bottom:1px solid #2a0000;
 display:flex;
 justify-content:space-between;
 align-items:center;
 padding:0 16px;
 }
 
-.screen{display:none;width:100vw;height:calc(100vh - 52px);}
+.screen{display:none;height:calc(100vh - 52px);}
 .active{display:flex !important;}
 
 #sidebar{
 width:140px;
 background:#0a0a0f;
-border-right:1px solid #300000;
+border-right:1px solid #2a0000;
 padding:10px;
 }
 
@@ -34,25 +34,27 @@ padding:10px;
 
 .card{
 background:#0f0f14;
-border:1px solid #300000;
+border:1px solid #2a0000;
 padding:15px;
 border-radius:12px;
 }
 
 #ageBtn{
-width:100px;
-height:100px;
+width:110px;
+height:110px;
 border-radius:50%;
-background:red;
+background:#ff2a2a;
 color:white;
 border:none;
 margin:20px auto;
 display:block;
+font-weight:bold;
+box-shadow:0 0 25px rgba(255,0,0,0.3);
 }
 
 #log{
-margin-top:10px;
 font-size:12px;
+margin-top:10px;
 max-height:200px;
 overflow-y:auto;
 }
@@ -67,7 +69,7 @@ overflow:hidden;
 
 .fill{
 height:100%;
-background:red;
+background:#ff2a2a;
 width:50%;
 }
 
@@ -75,7 +77,7 @@ width:50%;
 position:fixed;
 top:20px;
 right:20px;
-width:260px;
+width:250px;
 }
 
 .popup{
