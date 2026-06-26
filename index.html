@@ -1,80 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Second Chance</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Second Chance Life Simulator</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <!-- LOADING SCREEN -->
-<div id="loadingScreen">
-  <img src="logo.png" id="logo">
-  <h1>SECOND CHANCE</h1>
-  <p>Life Simulator</p>
-  <div class="loader"></div>
-</div>
-
-<!-- CHARACTER CREATION -->
-<div id="creatorScreen" class="hidden">
-
-  <div class="header">
-    <h1>New Life</h1>
-    <p>Create your character & start your story</p>
+<div id="loading-screen">
+  <div class="logo">
+    <img src="assets/logo.png" width="180">
   </div>
 
-  <div class="cardList">
+  <div class="loader"></div>
+  <p>Loading your second chance...</p>
+</div>
 
-    <div class="card">
+<!-- GAME -->
+<div id="game" class="hidden">
+
+  <div class="top-bar">
+    <h1>Welcome to Second Chance</h1>
+    <p>Create your character and begin your story</p>
+  </div>
+
+  <div class="creator">
+
+    <!-- CHARACTER PANEL -->
+    <div class="panel">
+      <h2>Character Creation</h2>
+
       <label>Name</label>
-      <input id="name" placeholder="Enter name">
-    </div>
+      <input type="text" id="name" placeholder="Enter name">
 
-    <div class="card">
+      <label>Age</label>
+      <input type="number" id="age" value="18">
+
       <label>Gender</label>
       <select id="gender">
         <option>Male</option>
         <option>Female</option>
+        <option>Other</option>
       </select>
-    </div>
 
-    <div class="card">
+      <!-- COUNTRY -->
       <label>Country</label>
-      <select id="country">
-        <option>United States</option>
-        <option>United Kingdom</option>
-        <option>Canada</option>
+      <select id="country" onchange="updateStates()">
+        <option value="">Select Country</option>
+        <option value="US">???? United States</option>
+        <option value="CA">???? Canada</option>
+        <option value="MX">???? Mexico</option>
+        <option value="UK">???? United Kingdom</option>
+        <option value="JP">???? Japan</option>
+        <option value="DE">???? Germany</option>
       </select>
-    </div>
 
-    <div class="card">
-      <label>Place</label>
-      <input id="place" placeholder="City">
-    </div>
-
-    <div class="card special">
-      <label>Special Talent</label>
-      <select id="talent">
-        <option>None</option>
-        <option>Sports</option>
-        <option>Music</option>
-        <option>Business</option>
+      <!-- STATE -->
+      <label>State / Province</label>
+      <select id="state">
+        <option>Select country first</option>
       </select>
+
+      <button onclick="startGame()">Start Life</button>
     </div>
 
-    <button class="startBtn" onclick="startGame()">
-      START A NEW LIFE
-    </button>
+    <!-- PREVIEW -->
+    <div class="preview">
+      <div class="card">
+        <h3>Preview</h3>
+        <p id="previewText">Fill out your character details...</p>
+      </div>
+    </div>
 
   </div>
-
-</div>
-
-<!-- GAME SCREEN (EMPTY FOR NOW) -->
-<div id="gameScreen" class="hidden">
-  <h2 style="text-align:center;margin-top:50px;">Game starts here next step ??</h2>
 </div>
 
 <script src="script.js"></script>
